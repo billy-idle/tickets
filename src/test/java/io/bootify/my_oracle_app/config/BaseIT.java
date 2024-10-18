@@ -4,9 +4,8 @@ import io.bootify.my_oracle_app.MyOracleAppApplication;
 import io.bootify.my_oracle_app.incidente.IncidenteRepository;
 import io.restassured.RestAssured;
 import jakarta.annotation.PostConstruct;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -53,12 +52,9 @@ public abstract class BaseIT {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
+    @SneakyThrows
     public String readResource(final String resourceName) {
-        try {
-            return StreamUtils.copyToString(getClass().getResourceAsStream(resourceName), StandardCharsets.UTF_8);
-        } catch (final IOException io) {
-            throw new UncheckedIOException(io);
-        }
+        return StreamUtils.copyToString(getClass().getResourceAsStream(resourceName), StandardCharsets.UTF_8);
     }
 
 }
