@@ -53,6 +53,9 @@ public class Incidente {
     @Column(nullable = false)
     private String municipio;
 
+    @Column(nullable = false)
+    private String departamento;
+
     @Column
     private String codigoDANE;
 
@@ -132,6 +135,14 @@ public class Incidente {
 
     public void setMunicipio(final String municipio) {
         this.municipio = municipio;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(final String departamento) {
+        this.departamento = departamento;
     }
 
     public String getCodigoDANE() {
