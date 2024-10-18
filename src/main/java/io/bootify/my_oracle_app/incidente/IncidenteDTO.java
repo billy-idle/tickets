@@ -36,6 +36,10 @@ public class IncidenteDTO {
     @Size(max = 255)
     private String municipio;
 
+    @NotNull
+    @Size(max = 255)
+    private String departamento;
+
     @Size(max = 255)
     private String codigoDANE;
 
@@ -116,6 +120,14 @@ public class IncidenteDTO {
 
     public void setMunicipio(final String municipio) {
         this.municipio = municipio;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(final String departamento) {
+        this.departamento = departamento;
     }
 
     public String getCodigoDANE() {
