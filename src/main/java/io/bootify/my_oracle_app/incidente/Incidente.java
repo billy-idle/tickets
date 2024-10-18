@@ -1,21 +1,15 @@
 package io.bootify.my_oracle_app.incidente;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
-
+@Table(name = "TBL_TICKETS", schema = "DEVIT_")
 @Entity
 public class Incidente {
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(name = "ID", nullable = false, updatable = false)
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
@@ -28,41 +22,41 @@ public class Incidente {
     )
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "TICKET", nullable = false)
     private String ticket;
 
-    @Column(nullable = false)
+    @Column(name = "ESTACIONBASE", nullable = false)
     private String estacionBase;
 
-    @Column(nullable = false)
+    @Column(name = "ESTADOEB", nullable = false)
     private String estadoEB;
 
-    @Column(nullable = false)
+    @Column(name = "INICIOFALLA", nullable = false)
     private LocalDateTime inicioFalla;
 
-    @Column
+    @Column(name = "FINFALLA")
     private LocalDateTime finFalla;
 
-    @Column(nullable = false)
+    @Column(name = "FECHAHORAREPORTE", nullable = false)
     private LocalDateTime fechaHoraReporte;
 
-    @Column(nullable = false)
+    @Column(name = "TECNOLOGIA", nullable = false)
     @Enumerated(EnumType.STRING)
     private Tecnologia tecnologia;
 
-    @Column(nullable = false)
+    @Column(name = "MUNICIPIO", nullable = false)
     private String municipio;
 
-    @Column(nullable = false)
+    @Column(name = "DEPARTAMENTO", nullable = false)
     private String departamento;
 
-    @Column
+    @Column(name = "CODIGODANE", nullable = false)
     private String codigoDANE;
 
-    @Column(nullable = false)
+    @Column(name = "RESPUESTA_API", nullable = false)
     private String respuestaAPI;
 
-    @Column(nullable = false)
+    @Column(name = "RESPUESTA_API", nullable = false)
     private LocalDateTime fechaRespuestaAPI;
 
     public Long getId() {
