@@ -1,13 +1,17 @@
 spring:
   datasource:
-    url: ${JDBC_DEVIT_URL:jdbc:oracle:thin:@localhost:1521:xe}
-    username: ${JDBC_DEVIT_USERNAME:sys as sysdba}
-    password: ${JDBC_DEVIT_PASSWORD:<<YOUR_PASSWORD>>}
+    url: ${JDBC_DEVIT_URL}
+    username: ${JDBC_DEVIT_USERNAME}
+    password: ${JDBC_DEVIT_PASSWORD}
     type: oracle.ucp.jdbc.PoolDataSource
     oracleucp:
       minPoolSize: 4
       maxPoolSize: 20
+    driver-class-name: oracle.jdbc.driver.OracleDriver
   jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    defer-datasource-initialization: true
+    show-sql: true
     hibernate:
       ddl-auto: update
     open-in-view: false
@@ -18,6 +22,10 @@ spring:
             non_contextual_creation: true
         id:
           new_generator_mappings: true
+        format_sql: true
+  sql:
+    init:
+      mode: always
 error:
   handling:
     http-status-in-json-response: true

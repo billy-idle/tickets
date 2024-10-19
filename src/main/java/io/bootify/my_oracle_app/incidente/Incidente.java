@@ -1,25 +1,23 @@
 package io.bootify.my_oracle_app.incidente;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-@Table(name = "TBL_TICKETS", schema = "DEVIT_")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "INCIDENTE", schema = "DEVIT_")
 public class Incidente {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
-    @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
-            allocationSize = 1,
-            initialValue = 10000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @Column(name = "TICKET", nullable = false)
@@ -41,8 +39,7 @@ public class Incidente {
     private LocalDateTime fechaHoraReporte;
 
     @Column(name = "TECNOLOGIA", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Tecnologia tecnologia;
+    private String tecnologia;
 
     @Column(name = "MUNICIPIO", nullable = false)
     private String municipio;
@@ -53,114 +50,22 @@ public class Incidente {
     @Column(name = "CODIGODANE", nullable = false)
     private String codigoDANE;
 
-    @Column(name = "RESPUESTA_API", nullable = false)
+    @Column(name = "RESPUESTA_API", nullable = true)
     private String respuestaAPI;
 
-    @Column(name = "RESPUESTA_API", nullable = false)
+    @Column(name = "FECHARESPUESTA_API", nullable = true)
     private LocalDateTime fechaRespuestaAPI;
 
-    public Long getId() {
-        return id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, ticket, estacionBase, estadoEB, inicioFalla, finFalla, fechaHoraReporte, tecnologia,
+                            municipio, departamento, codigoDANE);
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Incidente incidente)) return false;
+        return Objects.equals(id, incidente.id) && Objects.equals(ticket, incidente.ticket) && Objects.equals(estacionBase, incidente.estacionBase) && Objects.equals(estadoEB, incidente.estadoEB) && Objects.equals(inicioFalla, incidente.inicioFalla) && Objects.equals(finFalla, incidente.finFalla) && Objects.equals(fechaHoraReporte, incidente.fechaHoraReporte) && tecnologia == incidente.tecnologia && Objects.equals(municipio, incidente.municipio) && Objects.equals(departamento, incidente.departamento) && Objects.equals(codigoDANE, incidente.codigoDANE);
     }
-
-    public String getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(final String ticket) {
-        this.ticket = ticket;
-    }
-
-    public String getEstacionBase() {
-        return estacionBase;
-    }
-
-    public void setEstacionBase(final String estacionBase) {
-        this.estacionBase = estacionBase;
-    }
-
-    public String getEstadoEB() {
-        return estadoEB;
-    }
-
-    public void setEstadoEB(final String estadoEB) {
-        this.estadoEB = estadoEB;
-    }
-
-    public LocalDateTime getInicioFalla() {
-        return inicioFalla;
-    }
-
-    public void setInicioFalla(final LocalDateTime inicioFalla) {
-        this.inicioFalla = inicioFalla;
-    }
-
-    public LocalDateTime getFinFalla() {
-        return finFalla;
-    }
-
-    public void setFinFalla(final LocalDateTime finFalla) {
-        this.finFalla = finFalla;
-    }
-
-    public LocalDateTime getFechaHoraReporte() {
-        return fechaHoraReporte;
-    }
-
-    public void setFechaHoraReporte(final LocalDateTime fechaHoraReporte) {
-        this.fechaHoraReporte = fechaHoraReporte;
-    }
-
-    public Tecnologia getTecnologia() {
-        return tecnologia;
-    }
-
-    public void setTecnologia(final Tecnologia tecnologia) {
-        this.tecnologia = tecnologia;
-    }
-
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(final String municipio) {
-        this.municipio = municipio;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(final String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getCodigoDANE() {
-        return codigoDANE;
-    }
-
-    public void setCodigoDANE(final String codigoDANE) {
-        this.codigoDANE = codigoDANE;
-    }
-
-    public String getRespuestaAPI() {
-        return respuestaAPI;
-    }
-
-    public void setRespuestaAPI(final String respuestaAPI) {
-        this.respuestaAPI = respuestaAPI;
-    }
-
-    public LocalDateTime getFechaRespuestaAPI() {
-        return fechaRespuestaAPI;
-    }
-
-    public void setFechaRespuestaAPI(final LocalDateTime fechaRespuestaAPI) {
-        this.fechaRespuestaAPI = fechaRespuestaAPI;
-    }
-
 }
