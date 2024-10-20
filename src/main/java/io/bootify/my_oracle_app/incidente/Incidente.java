@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "INCIDENTE")
-public class Incidente {
+class Incidente {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -48,7 +48,7 @@ public class Incidente {
     private String departamento;
 
     @Column(name = "CODIGODANE", nullable = false)
-    private String codigoDANE;
+    private String codigoDane;
 
     @Column(name = "RESPUESTA_API", nullable = true)
     private String respuestaAPI;
@@ -59,13 +59,13 @@ public class Incidente {
     @Override
     public int hashCode() {
         return Objects.hash(id, ticket, estacionBase, estadoEB, inicioFalla, finFalla, fechaHoraReporte, tecnologia,
-                            municipio, departamento, codigoDANE);
+                            municipio, departamento, codigoDane);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Incidente incidente)) return false;
-        return Objects.equals(id, incidente.id) && Objects.equals(ticket, incidente.ticket) && Objects.equals(estacionBase, incidente.estacionBase) && Objects.equals(estadoEB, incidente.estadoEB) && Objects.equals(inicioFalla, incidente.inicioFalla) && Objects.equals(finFalla, incidente.finFalla) && Objects.equals(fechaHoraReporte, incidente.fechaHoraReporte) && tecnologia == incidente.tecnologia && Objects.equals(municipio, incidente.municipio) && Objects.equals(departamento, incidente.departamento) && Objects.equals(codigoDANE, incidente.codigoDANE);
+        return Objects.equals(id, incidente.id) && Objects.equals(ticket, incidente.ticket) && Objects.equals(estacionBase, incidente.estacionBase) && Objects.equals(estadoEB, incidente.estadoEB) && Objects.equals(inicioFalla, incidente.inicioFalla) && Objects.equals(finFalla, incidente.finFalla) && Objects.equals(fechaHoraReporte, incidente.fechaHoraReporte) && tecnologia == incidente.tecnologia && Objects.equals(municipio, incidente.municipio) && Objects.equals(departamento, incidente.departamento) && Objects.equals(codigoDane, incidente.codigoDane);
     }
 }

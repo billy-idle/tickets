@@ -5,7 +5,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
 
 
 @RestController
@@ -65,14 +69,6 @@ public class IncidenteResource {
         return ResponseEntity.ok(incidenteService.get(id));
     }
 
-    @PostMapping
-    @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createIncidente(
-            @RequestBody @Valid final IncidenteDTO incidenteDTO) {
-        final Long createdId = incidenteService.create(incidenteDTO);
-        return new ResponseEntity<>(createdId, HttpStatus.CREATED);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Long> updateIncidente(@PathVariable(name = "id") final Long id,
             @RequestBody @Valid final IncidenteDTO incidenteDTO) {
@@ -80,11 +76,28 @@ public class IncidenteResource {
         return ResponseEntity.ok(id);
     }
 
-    @DeleteMapping("/{id}")
-    @ApiResponse(responseCode = "204")
-    public ResponseEntity<Void> deleteIncidente(@PathVariable(name = "id") final Long id) {
-        incidenteService.delete(id);
-        return ResponseEntity.noContent().build();
+    @Operation(
+            parameters = {
+                    @Parameter(
+                            name = "page",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(implementation = Integer.class)
+                    ),
+                    @Parameter(
+                            name = "size",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(implementation = Integer.class)
+                    ),
+                    @Parameter(
+                            name = "sort",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(implementation = String.class)
+                    )
+            }
+    )
+    @GetMapping("/pending-to-report")
+    public ResponseEntity<Page<IncidenteDTO>> getAllPendingToReport(
+            @Parameter(hidden = true) @SortDefault(sort = "id") @PageableDefault(size = 20) final Pageable pageable, @Nullable LocalDateTime fecha) {
+        return ResponseEntity.ok(incidenteService.findAllPendientePorReportar(pageable, fecha));
     }
-
 }

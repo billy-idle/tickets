@@ -1,7 +1,8 @@
 package io.bootify.my_oracle_app.incidente;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,49 +11,44 @@ import java.time.LocalDateTime;
 @Data
 public class IncidenteDTO {
 
+    @JsonProperty("id")
     private Long id;
 
-    @NotNull
-    @Size(max = 255)
+    @JsonProperty("Ticket")
     private String ticket;
 
-    @NotNull
-    @Size(max = 255)
+    @JsonProperty("EstacionBase")
     private String estacionBase;
 
-    @NotNull
-    @Size(max = 255)
+    @JsonProperty("EstadoEB")
     private String estadoEB;
 
-    @NotNull
+    @JsonProperty("InicioFalla")
     private LocalDateTime inicioFalla;
 
-    private LocalDateTime finFalla;
-
-    @NotNull
+    @JsonProperty("FechaHoraReporte")
     private LocalDateTime fechaHoraReporte;
 
-    @NotNull
-    @Size(max = 2)
+    @JsonProperty("FinFalla")
+    private LocalDateTime finFalla;
+
+    @JsonProperty("Tecnologia")
     private String tecnologia;
 
-    @NotNull
-    @Size(max = 255)
+    @JsonProperty("Municipio")
     private String municipio;
 
-    @NotNull
-    @Size(max = 255)
+    @JsonProperty("Departamento")
     private String departamento;
 
-    @Size(max = 255)
-    private String codigoDANE;
+    @JsonProperty("CodigoDANE")
+    private String codigoDane;
 
-    @NotNull
-    @Size(max = 255)
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
     private String respuestaAPI;
 
-    @NotNull
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
     private LocalDateTime fechaRespuestaAPI;
 }
