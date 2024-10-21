@@ -4,9 +4,6 @@ import io.bootify.my_oracle_app.MyOracleAppApplication;
 import io.bootify.my_oracle_app.incidente.IncidenteRepository;
 import io.restassured.RestAssured;
 import jakarta.annotation.PostConstruct;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -16,6 +13,10 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlMergeMode;
 import org.springframework.util.StreamUtils;
 import org.testcontainers.oracle.OracleContainer;
+
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -33,11 +34,12 @@ import org.testcontainers.oracle.OracleContainer;
 public abstract class BaseIT {
 
     @ServiceConnection
-    private static final OracleContainer oracleContainer = new OracleContainer("gvenzl/oracle-free:23.3-slim-faststart");
+    private static final OracleContainer oracleContainer = new OracleContainer("gvenzl/oracle-free:23" +
+                                                                                           ".3-slim-faststart");
 
     static {
         oracleContainer.withReuse(true)
-                .start();
+                       .start();
     }
 
     @LocalServerPort
