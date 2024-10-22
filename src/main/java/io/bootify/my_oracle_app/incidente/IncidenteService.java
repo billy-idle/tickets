@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -52,10 +53,9 @@ public class IncidenteService {
     }
 
 
-    public void update(final Long id, final IncidenteDTO incidenteDTO) {
-        final Incidente incidente = incidenteRepository.findById(id)
-                                                       .orElseThrow(NotFoundException::new);
-        incidenteMapper.updateIncidente(incidenteDTO, incidente);
+    @Transactional
+    public void update(final IncidenteDTO incidenteDTO) {
+        final Incidente incidente = incidenteMapper.toIncidente(incidenteDTO);
         incidenteRepository.save(incidente);
     }
 

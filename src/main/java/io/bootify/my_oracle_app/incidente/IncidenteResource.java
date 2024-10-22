@@ -69,13 +69,6 @@ public class IncidenteResource {
         return ResponseEntity.ok(incidenteService.get(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Long> updateIncidente(@PathVariable(name = "id") final Long id,
-            @RequestBody @Valid final IncidenteDTO incidenteDTO) {
-        incidenteService.update(id, incidenteDTO);
-        return ResponseEntity.ok(id);
-    }
-
     @Operation(
             parameters = {
                     @Parameter(

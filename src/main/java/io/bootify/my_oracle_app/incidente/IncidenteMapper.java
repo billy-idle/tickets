@@ -18,4 +18,5 @@ public interface IncidenteMapper {
     @Mapping(target = "id", ignore = true)
     Incidente updateIncidente(IncidenteDTO incidenteDTO, @MappingTarget Incidente incidente);
 
+    Incidente toIncidente(IncidenteDTO incidenteDTO);
 }
