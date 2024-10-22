@@ -1,23 +1,3 @@
-spring:
-  datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:oracle:thin:@localhost:1521:xe}
-    username: ${JDBC_DATABASE_USERNAME:sys as sysdba}
-    password: ${JDBC_DATABASE_PASSWORD:<<YOUR_PASSWORD>>}
-    type: oracle.ucp.jdbc.PoolDataSource
-    oracleucp:
-      minPoolSize: 4
-      maxPoolSize: 20
-  jpa:
-    hibernate:
-      ddl-auto: update
-    open-in-view: false
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-        id:
-          new_generator_mappings: true
 error:
   handling:
     http-status-in-json-response: true
