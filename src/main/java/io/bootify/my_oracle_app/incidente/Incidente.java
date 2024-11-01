@@ -2,8 +2,6 @@ package io.bootify.my_oracle_app.incidente;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -51,8 +49,7 @@ public class Incidente {
     private LocalDateTime fechaHoraReporte;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Tecnologia tecnologia;
+    private String tecnologia;
 
     @Column(nullable = false)
     private String municipio;

@@ -34,7 +34,8 @@ public class IncidenteDTO {
     private LocalDateTime fechaHoraReporte;
 
     @NotNull
-    private Tecnologia tecnologia;
+    @Size(max = 255)
+    private String tecnologia;
 
     @NotNull
     @Size(max = 255)
